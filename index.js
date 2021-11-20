@@ -77,7 +77,7 @@ const promptUser = () => {
 };
 
 // Function to write README file
-const writeToFile = ( data) => {
+const writeToFile = (data) => {
     return new Promise((resolve, reject) => {
         fs.writeFile('./dist/README.md', data, err => {
             // if there's an error, rejet the Promise and send the error to the Promise's `.catch()` method
