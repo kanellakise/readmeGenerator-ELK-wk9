@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown')
 
 
@@ -71,14 +72,14 @@ const promptUser = () => {
             }
         ])
         .then(answers => {
-            console.log(answers);
+            return answers;
         });
 };
 
 // Function to write README file
-const writeToFile = (fileName, data) => {
+const writeToFile = ( data) => {
     return new Promise((resolve, reject) => {
-        fs.writeToFile(fileName, data, err => {
+        fs.writeFile('./dist/README.md', data, err => {
             // if there's an error, rejet the Promise and send the error to the Promise's `.catch()` method
             if(err) {
                 reject(err);
@@ -97,7 +98,16 @@ const writeToFile = (fileName, data) => {
 
 // Function call to initialize app
 function init() {
-
+    promptUser()
+        .then(answers => {
+            return generateMarkdown(answers);
+        })
+        .then(markdown => {
+            return writeToFile(markdown)
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
-promptUser()
+init();
