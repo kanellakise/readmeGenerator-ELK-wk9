@@ -52,9 +52,10 @@ const promptUser = () => {
 
             // License section (yes/no prompt, input if yes)
             {
-                type: 'input',
+                type: 'list',
                 name: 'license',
-                message: 'Please include a license link.'
+                message: 'Please include a license link.',
+                choices: ['Apache', 'MIT', 'GNU', 'None']
             },
 
             // Features list prompt
